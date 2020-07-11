@@ -165,8 +165,8 @@ DocProject/Help/*.hhk
 DocProject/Help/*.hhp
 DocProject/Help/Html2
 DocProject/Help/html
-MVC/BEU/App.Config
-MVC/MVC/Web.config
+PROJECT/BEU/App.Config
+PROJECT/MVC/Web.config
 
 # Click-Once directory
 publish/
