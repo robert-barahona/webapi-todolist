@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVC", "MVC\MVC.csproj", "{C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BEU", "BEU\BEU.csproj", "{04C4AC7C-450A-4CC3-8823-695D6CFCE455}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API", "API\API.csproj", "{497C31FA-1893-48AD-AF0B-ECA4ABDB219D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{04C4AC7C-450A-4CC3-8823-695D6CFCE455}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{04C4AC7C-450A-4CC3-8823-695D6CFCE455}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{04C4AC7C-450A-4CC3-8823-695D6CFCE455}.Release|Any CPU.Build.0 = Release|Any CPU
+		{497C31FA-1893-48AD-AF0B-ECA4ABDB219D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{497C31FA-1893-48AD-AF0B-ECA4ABDB219D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{497C31FA-1893-48AD-AF0B-ECA4ABDB219D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{497C31FA-1893-48AD-AF0B-ECA4ABDB219D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

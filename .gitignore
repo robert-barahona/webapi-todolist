@@ -167,6 +167,7 @@ DocProject/Help/Html2
 DocProject/Help/html
 PROJECT/BEU/App.Config
 PROJECT/MVC/Web.config
+PROJECT/API/Web.config
 
 # Click-Once directory
 publish/
