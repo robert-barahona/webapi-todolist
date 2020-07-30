@@ -15,114 +15,76 @@ namespace API.Controllers
 {
     public class UsersController : ApiController
     {
-        private Entities db = new Entities();
-
         // GET: api/Users
         public IQueryable<Users> GetUsers()
         {
-            return db.Users;
+            return UsersBLL.Get();
         }
 
         // GET: api/Users/5
         [ResponseType(typeof(Users))]
         public IHttpActionResult GetUsers(int id)
         {
-            Users users = db.Users.Find(id);
-            if (users == null)
+            Users user = UsersBLL.Get(id);
+            if (user == null)
             {
                 return NotFound();
             }
 
-            return Ok(users);
+            return Ok(user);
         }
 
         // PUT: api/Users/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutUsers(int id, Users users)
+        public IHttpActionResult PutUsers(int id, Users user)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != users.id_user)
+            if (id != user.id_user)
             {
                 return BadRequest();
             }
 
-            db.Entry(users).State = EntityState.Modified;
-
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!UsersExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            UsersBLL.Update(user);
 
             return StatusCode(HttpStatusCode.NoContent);
         }
 
         // POST: api/Users
         [ResponseType(typeof(Users))]
-        public IHttpActionResult PostUsers(Users users)
+        public IHttpActionResult PostUsers(Users user)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            UsersBLL.Create(users);
+            UsersBLL.Create(user);
 
-            return CreatedAtRoute("DefaultApi", new { id = users.id_user }, users);
+            return CreatedAtRoute("DefaultApi", new { id = user.id_user }, user);
         }
 
         // DELETE: api/Users/5
         [ResponseType(typeof(Users))]
         public IHttpActionResult DeleteUsers(int id)
         {
-            Users users = db.Users.Find(id);
-            if (users == null)
+            Users user = UsersBLL.Get(id);
+            if (user == null)
             {
                 return NotFound();
             }
 
-            List<Board> boards = BoardsBLL.List();
+            UsersBLL.Delete(id);
 
-            foreach (var item in boards)
-            {
-                if (item.id_owner == users.id_user)
-                {
-                    BoardsBLL.Delete(item.id_board);
-                }
-            }
-
-            db.Users.Remove(users);
-            db.SaveChanges();
-
-            return Ok(users);
+            return Ok(user);
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
-
-        private bool UsersExists(int id)
-        {
-            return db.Users.Count(e => e.id_user == id) > 0;
-        }
+        //private bool UsersExists(int id)
+        //{
+        //    return db.Users.Count(e => e.id_user == id) > 0;
+        //}
     }
 }

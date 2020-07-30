@@ -29,6 +29,12 @@ namespace BEU.Transactions
             }
         }
 
+        public static IQueryable<Users> Get()
+        {
+            Entities db = new Entities();
+            return db.Users;
+        }
+
         public static Users Get(int? id)
         {
             Entities db = new Entities();
@@ -77,7 +83,7 @@ namespace BEU.Transactions
                         {
                             if (item.id_owner == User.id_user)
                             {
-                                BoardsBLL.Delete(item.id_owner);
+                                BoardsBLL.Delete(item.id_board);
                             }
                         }
                         db.Entry(User).State = System.Data.Entity.EntityState.Deleted;

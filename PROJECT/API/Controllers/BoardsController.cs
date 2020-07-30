@@ -9,24 +9,23 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using BEU;
+using BEU.Transactions;
 
 namespace API.Controllers
 {
     public class BoardsController : ApiController
     {
-        private Entities db = new Entities();
-
         // GET: api/Boards
         public IQueryable<Board> GetBoard()
         {
-            return db.Board;
+            return BoardsBLL.Get();
         }
 
         // GET: api/Boards/5
         [ResponseType(typeof(Board))]
         public IHttpActionResult GetBoard(int id)
         {
-            Board board = db.Board.Find(id);
+            Board board = BoardsBLL.Get(id);
             if (board == null)
             {
                 return NotFound();
@@ -49,23 +48,7 @@ namespace API.Controllers
                 return BadRequest();
             }
 
-            db.Entry(board).State = EntityState.Modified;
-
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!BoardExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            BoardsBLL.Update(board);
 
             return StatusCode(HttpStatusCode.NoContent);
         }
@@ -79,8 +62,7 @@ namespace API.Controllers
                 return BadRequest(ModelState);
             }
 
-            db.Board.Add(board);
-            db.SaveChanges();
+            BoardsBLL.Create(board);
 
             return CreatedAtRoute("DefaultApi", new { id = board.id_board }, board);
         }
@@ -89,30 +71,20 @@ namespace API.Controllers
         [ResponseType(typeof(Board))]
         public IHttpActionResult DeleteBoard(int id)
         {
-            Board board = db.Board.Find(id);
+            Board board = BoardsBLL.Get(id);
             if (board == null)
             {
                 return NotFound();
             }
 
-            db.Board.Remove(board);
-            db.SaveChanges();
+            BoardsBLL.Delete(id);
 
             return Ok(board);
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
-
-        private bool BoardExists(int id)
-        {
-            return db.Board.Count(e => e.id_board == id) > 0;
-        }
+        //private bool BoardExists(int id)
+        //{
+        //    return db.Board.Count(e => e.id_board == id) > 0;
+        //}
     }
 }

@@ -29,6 +29,12 @@ namespace BEU.Transactions
             }
         }
 
+        public static IQueryable<Task> Get()
+        {
+            Entities db = new Entities();
+            return db.Task;
+        }
+
         public static Task Get(int? id)
         {
             Entities db = new Entities();

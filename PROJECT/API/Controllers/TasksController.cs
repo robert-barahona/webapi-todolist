@@ -15,19 +15,17 @@ namespace API.Controllers
 {
     public class TasksController : ApiController
     {
-        private Entities db = new Entities();
-
         // GET: api/Tasks
         public IQueryable<Task> GetTask()
         {
-            return db.Task;
+            return TasksBLL.Get();
         }
 
         // GET: api/Tasks/5
         [ResponseType(typeof(Task))]
         public IHttpActionResult GetTask(int id)
         {
-            Task task = db.Task.Find(id);
+            Task task = TasksBLL.Get(id);
             if (task == null)
             {
                 return NotFound();
@@ -40,7 +38,6 @@ namespace API.Controllers
         [ResponseType(typeof(void))]
         public IHttpActionResult PutTask(int id, Task task)
         {
-            Console.WriteLine(id.ToString() + task);
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -52,22 +49,6 @@ namespace API.Controllers
             }
 
             TasksBLL.Update(task);
-
-            //try
-            //{
-            //    db.SaveChanges();
-            //}
-            //catch (DbUpdateConcurrencyException)
-            //{
-            //    if (!TaskExists(id))
-            //    {
-            //        return NotFound();
-            //    }
-            //    else
-            //    {
-            //        throw;
-            //    }
-            //}
 
             return StatusCode(HttpStatusCode.NoContent);
         }
@@ -81,8 +62,7 @@ namespace API.Controllers
                 return BadRequest(ModelState);
             }
 
-            db.Task.Add(task);
-            db.SaveChanges();
+            TasksBLL.Create(task);
 
             return CreatedAtRoute("DefaultApi", new { id = task.id_task }, task);
         }
@@ -91,30 +71,20 @@ namespace API.Controllers
         [ResponseType(typeof(Task))]
         public IHttpActionResult DeleteTask(int id)
         {
-            Task task = db.Task.Find(id);
+            Task task = TasksBLL.Get(id);
             if (task == null)
             {
                 return NotFound();
             }
 
-            db.Task.Remove(task);
-            db.SaveChanges();
+            TasksBLL.Delete(id);
 
             return Ok(task);
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
-
-        private bool TaskExists(int id)
-        {
-            return db.Task.Count(e => e.id_task == id) > 0;
-        }
+        //private bool TaskExists(int id)
+        //{
+        //    return db.Task.Count(e => e.id_task == id) > 0;
+        //}
     }
 }

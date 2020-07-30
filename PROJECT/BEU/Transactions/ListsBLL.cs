@@ -29,6 +29,12 @@ namespace BEU.Transactions
             }
         }
 
+        public static IQueryable<List> Get()
+        {
+            Entities db = new Entities();
+            return db.List;
+        }
+
         public static List Get(int? id)
         {
             Entities db = new Entities();
@@ -71,7 +77,7 @@ namespace BEU.Transactions
                         {
                             if (item.id_list == List.id_list)
                             {
-                                TasksBLL.Delete(item.id_list);
+                                TasksBLL.Delete(item.id_task);
                             }
                         }
                         db.Entry(List).State = System.Data.Entity.EntityState.Deleted;
