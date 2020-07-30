@@ -9,6 +9,7 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using BEU;
+using BEU.Transactions;
 
 namespace API.Controllers
 {
@@ -39,6 +40,7 @@ namespace API.Controllers
         [ResponseType(typeof(void))]
         public IHttpActionResult PutTask(int id, Task task)
         {
+            Console.WriteLine(id.ToString() + task);
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -49,23 +51,23 @@ namespace API.Controllers
                 return BadRequest();
             }
 
-            db.Entry(task).State = EntityState.Modified;
+            TasksBLL.Update(task);
 
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!TaskExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            //try
+            //{
+            //    db.SaveChanges();
+            //}
+            //catch (DbUpdateConcurrencyException)
+            //{
+            //    if (!TaskExists(id))
+            //    {
+            //        return NotFound();
+            //    }
+            //    else
+            //    {
+            //        throw;
+            //    }
+            //}
 
             return StatusCode(HttpStatusCode.NoContent);
         }

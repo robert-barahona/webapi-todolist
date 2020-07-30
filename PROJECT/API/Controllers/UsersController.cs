@@ -9,6 +9,7 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using BEU;
+using BEU.Transactions;
 
 namespace API.Controllers
 {
@@ -79,8 +80,7 @@ namespace API.Controllers
                 return BadRequest(ModelState);
             }
 
-            db.Users.Add(users);
-            db.SaveChanges();
+            UsersBLL.Create(users);
 
             return CreatedAtRoute("DefaultApi", new { id = users.id_user }, users);
         }
@@ -93,6 +93,16 @@ namespace API.Controllers
             if (users == null)
             {
                 return NotFound();
+            }
+
+            List<Board> boards = BoardsBLL.List();
+
+            foreach (var item in boards)
+            {
+                if (item.id_owner == users.id_user)
+                {
+                    BoardsBLL.Delete(item.id_board);
+                }
             }
 
             db.Users.Remove(users);

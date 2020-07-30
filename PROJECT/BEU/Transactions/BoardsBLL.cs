@@ -65,7 +65,16 @@ namespace BEU.Transactions
                 {
                     try
                     {
+                        
                         Board Board = db.Board.Find(id);
+                        List<List> lists = ListsBLL.List();
+                        foreach (var item in lists)
+                        {
+                            if (item.id_board == Board.id_board)
+                            {
+                                ListsBLL.Delete(item.id_list);
+                            }
+                        }
                         db.Entry(Board).State = System.Data.Entity.EntityState.Deleted;
                         db.SaveChanges();
                         transaction.Commit();
