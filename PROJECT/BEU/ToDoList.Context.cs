@@ -27,7 +27,7 @@ namespace BEU
     
         public virtual DbSet<Board> Board { get; set; }
         public virtual DbSet<List> List { get; set; }
-        public virtual DbSet<Task> Task { get; set; }
         public virtual DbSet<Users> Users { get; set; }
+        public virtual DbSet<Task> Task { get; set; }
     }
 }

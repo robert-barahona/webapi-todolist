@@ -14,18 +14,10 @@ namespace BEU
     
     public partial class List
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public List()
-        {
-            this.Task = new HashSet<Task>();
-        }
-    
         public int id_list { get; set; }
         public string name_list { get; set; }
         public int id_board { get; set; }
     
         public virtual Board Board { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Task> Task { get; set; }
     }
 }
