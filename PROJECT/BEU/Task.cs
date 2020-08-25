@@ -19,5 +19,6 @@ namespace BEU
         public string descr { get; set; }
         public Nullable<int> asigned_to { get; set; }
         public int id_list { get; set; }
+        public Nullable<int> index_task { get; set; }
     }
 }

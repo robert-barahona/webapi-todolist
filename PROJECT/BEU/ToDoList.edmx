@@ -27,10 +27,11 @@
             <PropertyRef Name="id_task" />
           </Key>
           <Property Name="id_task" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="title" Type="varchar" MaxLength="20" Nullable="false" />
-          <Property Name="descr" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="title" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="descr" Type="varchar" MaxLength="1000" />
           <Property Name="asigned_to" Type="int" />
           <Property Name="id_list" Type="int" Nullable="false" />
+          <Property Name="index_task" Type="int" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
@@ -158,10 +159,11 @@
             <PropertyRef Name="id_task" />
           </Key>
           <Property Name="id_task" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="title" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="descr" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="title" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="descr" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
           <Property Name="asigned_to" Type="Int32" />
           <Property Name="id_list" Type="Int32" Nullable="false" />
+          <Property Name="index_task" Type="Int32" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -202,6 +204,7 @@
           <EntitySetMapping Name="Task">
             <EntityTypeMapping TypeName="Model.Task">
               <MappingFragment StoreEntitySet="Task">
+                <ScalarProperty Name="index_task" ColumnName="index_task" />
                 <ScalarProperty Name="id_list" ColumnName="id_list" />
                 <ScalarProperty Name="asigned_to" ColumnName="asigned_to" />
                 <ScalarProperty Name="descr" ColumnName="descr" />
