@@ -21,6 +21,7 @@
           <Property Name="id_list" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="name_list" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="id_board" Type="int" Nullable="false" />
+          <Property Name="index_list" Type="int" />
         </EntityType>
         <EntityType Name="Task">
           <Key>
@@ -104,6 +105,7 @@
           <Property Name="name_list" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="id_board" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Board" Relationship="Self.fk_Board" FromRole="List" ToRole="Board" />
+          <Property Name="index_list" Type="Int32" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
@@ -184,6 +186,7 @@
           <EntitySetMapping Name="List">
             <EntityTypeMapping TypeName="Model.List">
               <MappingFragment StoreEntitySet="List">
+                <ScalarProperty Name="index_list" ColumnName="index_list" />
                 <ScalarProperty Name="id_list" ColumnName="id_list" />
                 <ScalarProperty Name="name_list" ColumnName="name_list" />
                 <ScalarProperty Name="id_board" ColumnName="id_board" />

@@ -17,6 +17,7 @@ namespace BEU
         public int id_list { get; set; }
         public string name_list { get; set; }
         public int id_board { get; set; }
+        public Nullable<int> index_list { get; set; }
     
         public virtual Board Board { get; set; }
     }
