@@ -43,6 +43,7 @@
           <Property Name="last_name" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="email" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="pass" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="invitations" Type="varchar" MaxLength="100" />
         </EntityType>
         <Association Name="fk_Board">
           <End Role="Board" Type="Self.Board" Multiplicity="1" />
@@ -117,6 +118,7 @@
           <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="pass" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Board" Relationship="Self.fk_User" FromRole="Users" ToRole="Board" />
+          <Property Name="invitations" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="fk_Board">
           <End Role="Board" Type="Self.Board" Multiplicity="1" />
@@ -196,6 +198,7 @@
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="Model.Users">
               <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="invitations" ColumnName="invitations" />
                 <ScalarProperty Name="id_user" ColumnName="id_user" />
                 <ScalarProperty Name="first_name" ColumnName="first_name" />
                 <ScalarProperty Name="last_name" ColumnName="last_name" />
